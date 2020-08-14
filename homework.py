@@ -10,12 +10,12 @@ load_dotenv()
 def get_status(user_id):
     url = 'https://api.vk.com/method/users.get'
     params = {
-        'user_id': user_id,
+        'user_ids': user_id,
         'access_token': os.getenv('VK_TOKEN'),
         'v': 5.92,
         'fields': 'online'
     }
-    response = requests.post(url, params).json()['response']
+    response = requests.post(url, params=params).json()['response']
     return response[0]['online']
 
 
