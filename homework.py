@@ -15,7 +15,7 @@ def get_status(user_id):
         'v': 5.92,
         'fields': 'online'
     }
-    response = requests.get(url, params).json()['response']
+    response = requests.post(url, params).json()['response']
     return response[0]['online']
 
 
