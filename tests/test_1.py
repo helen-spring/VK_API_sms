@@ -34,14 +34,14 @@ class TestComment:
 
         monkeypatch.setattr(twilio.rest, "Client", mock_twilio_client)
 
-        import homework
+        import sending_sms
 
-        assert hasattr(homework, 'sms_sender'), 'Функция `sms_sender()` не существует. Не удаляйте её.'
-        assert hasattr(homework.sms_sender, '__call__'), 'Функция `sms_sender()` не существует. Не удаляйте её.'
-        assert len(signature(homework.sms_sender).parameters) == 1, \
+        assert hasattr(sending_sms, 'sms_sender'), 'Функция `sms_sender()` не существует. Не удаляйте её.'
+        assert hasattr(sending_sms.sms_sender, '__call__'), 'Функция `sms_sender()` не существует. Не удаляйте её.'
+        assert len(signature(sending_sms.sms_sender).parameters) == 1, \
             'Функция `sms_sender()` должна быть с одним параметром.'
 
-        result = homework.sms_sender('Test_message_check')
+        result = sending_sms.sms_sender('Test_message_check')
         assert result == twilio_sid, \
             'Проверьте, что возвращаете `sid` смс сообщения в результате работы функции `sms_sender`'
 
@@ -57,13 +57,13 @@ class TestComment:
         monkeypatch.setattr(requests, 'get', mock_response_get)
         monkeypatch.setattr(requests, 'post', mock_response_post)
 
-        import homework
+        import sending_sms
 
-        assert hasattr(homework, 'get_status'), 'Функция `get_status()` не существует. Не удаляйте её.'
-        assert hasattr(homework.get_status, '__call__'), 'Функция `get_status()` не существует. Не удаляйте её.'
-        assert len(signature(homework.get_status).parameters) == 1, \
+        assert hasattr(sending_sms, 'get_status'), 'Функция `get_status()` не существует. Не удаляйте её.'
+        assert hasattr(sending_sms.get_status, '__call__'), 'Функция `get_status()` не существует. Не удаляйте её.'
+        assert len(signature(sending_sms.get_status).parameters) == 1, \
             'Функция `get_status()` должна быть с одним параметром.'
 
-        result = homework.get_status(234435234)
+        result = sending_sms.get_status(234435234)
         assert result == vk_sid, \
             'Проверьте, что возвращаете значение `online` в ответе API ВК в результате работы функции `get_status`'
